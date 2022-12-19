@@ -14,6 +14,7 @@
 | birth_day          | date    | null: false               |
 
 has_many :items
+belong_to :purchase
 
 
 
@@ -22,7 +23,7 @@ has_many :items
 | Column                      | Type       | Options                        |
 | --------------------------- | ---------- | ------------------------------ |
 | name                        | string     | null: false                    |
-| explanation                 | string     | null: false                    |
+| explanation                 | text       | null: false                    |
 | price                       | integer    | null: false                    |
 | category_id                 | integer    | null: false                    |
 | condition_id                | integer    | null: false                    |
@@ -37,16 +38,14 @@ has_many :item_comments
 
 ## purchaseテーブル
 
-| Column          | Type     | Options     |
+| Column          | Type     | Options                          |
 | --------------- | ---------- | ------------------------------ |
-| card_number     | integer    | null: false                    |
-| date_of_expiry  | integer    | null: false                    |
-| security_code   | integer    | null: false                    |
-| items           | references | null: false, foreign_key: true |
+| item            | references | null: false, foreign_key: true |
 | user            | references | null: false, foreign_key: true |
 
 belongs_to :item
-belongs_to :shipping_address
+has_one :shipping_address
+has_many :user
 
 ## shipping_addressテーブル
 
