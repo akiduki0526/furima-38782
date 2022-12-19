@@ -14,7 +14,7 @@
 | birth_day          | date    | null: false               |
 
 has_many :items
-has_many :purchase
+has_many :purchases
 
 
 
