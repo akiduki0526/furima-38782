@@ -14,7 +14,7 @@
 | birth_day          | date    | null: false               |
 
 has_many :items
-belong_to :purchase
+has_many :purchase
 
 
 
@@ -35,6 +35,7 @@ belong_to :purchase
 belongs_to :user
 has_many :comments
 has_many :item_comments
+has_one :purchase
 
 ## purchaseテーブル
 
@@ -45,7 +46,7 @@ has_many :item_comments
 
 belongs_to :item
 has_one :shipping_address
-has_many :user
+belongs_to :user
 
 ## shipping_addressテーブル
 
