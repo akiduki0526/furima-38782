@@ -126,7 +126,7 @@ describe 'ユーザー新規登録' do
       expect(@user.errors.full_messages).to include("Last name kana is invalid")
       end
 
-    it '名（カナ）が空だと登録できない' do
+    it '生年月日が空だと登録できない' do
       @user.birth_day = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
