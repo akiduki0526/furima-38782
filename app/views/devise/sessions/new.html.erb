@@ -8,9 +8,7 @@
     </h1>
   </div>
 
-<% if @user.errors.any? %>
   <%=render 'shared/error_messages', model: @user %>
-  <%end%>
   
   <div class='login-flash-message'>
     <%= flash[:notice] %>

@@ -5,10 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :email, presence: true, length: { minimum: 6 }
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates :password, length: { minimum: 6 }, format:{with: VALID_PASSWORD_REGEX}
-  ZENKAKU_REGEXP =  /\A[ぁ-んァ-ン一-龥]/
+  validates :password, format:{with: VALID_PASSWORD_REGEX}
+  ZENKAKU_REGEXP =  /\A[ぁ-んァ-ヶ一-龥々ー]+\z/
   validates :first_name, presence: true,format:{with: ZENKAKU_REGEXP}
   validates :last_name, presence: true,format:{with: ZENKAKU_REGEXP}
   KATAKANA_REGEXP = /\A[\p{katakana}\u{30fc}]+\z/
