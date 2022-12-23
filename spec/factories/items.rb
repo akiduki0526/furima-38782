@@ -3,7 +3,6 @@ FactoryBot.define do
     association :user
     name                           {Faker::Name.initials(number: 2)}
     explanation                    {'test'}
-    image                          {'design.jpg'}
     price                          {'1000'}
     condition_id                   {'2'}
     shipping_charge_id             {'2'}
