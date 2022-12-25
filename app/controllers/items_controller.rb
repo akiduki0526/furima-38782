@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new,:edit]
+  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.order(id: "DESC")
@@ -20,8 +21,25 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
+
+  def edit
+    if current_user.id != @item.user.id
+      redirect_to root_path
+    end
+  end
+
+
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
+  end
+
+
 
 
 
@@ -33,5 +51,8 @@ class ItemsController < ApplicationController
     :shipping_charge_id, :prefectures_id, :estimated_shipping_date_id).merge(user_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+   end
 
 end
