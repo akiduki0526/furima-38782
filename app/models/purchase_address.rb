@@ -14,7 +14,7 @@ class PurchaseAddress
     validates :token, presence: true
 
   end
-    validates :prefectures_id, numericality: {other_than: 0, message: "can't be blank"}
+    validates :prefectures_id, numericality: {other_than: 1, message: "can't be blank"}
 
 
     def save

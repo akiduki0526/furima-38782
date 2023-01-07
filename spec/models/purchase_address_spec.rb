@@ -42,6 +42,12 @@ RSpec.describe PurchaseAddress, type: :model do
       expect(@purchase_address.errors.full_messages).to include("Prefectures can't be blank")
     end
 
+    it '都道府県が---では保存できないこと' do
+      @purchase_address.prefectures_id = '1'
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("Prefectures can't be blank")
+    end
+
     it '市町村区が空欄では保存できないこと' do
       @purchase_address.district = ''
       @purchase_address.valid?
@@ -66,13 +72,29 @@ RSpec.describe PurchaseAddress, type: :model do
       expect(@purchase_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
     end
 
+    it '電話番号が長すぎると保存できないこと' do
+      @purchase_address.phone_number = '090000000000000000'
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+    end
+
     it '電話番号は半角数字以外は保存できないこと' do
       @purchase_address.phone_number = '０９０１２３４５６７８'
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
     end
 
+    it 'Userが紐づいていないと登録できない' do
+      @purchase_address.user_id = nil
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
 
+      it 'Itemが紐づいていないと登録できない' do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+        end
 end
 end
 

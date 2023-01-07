@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @item.user.id
+    if current_user.id != @item.user.id || @item.purchase.present?
       redirect_to root_path
     end
   end
@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
 
 
   def destroy
-   if current_user.id == @item.user_id
+   if current_user.id == @item.user_id || @item.purchase.nil?
     @item.destroy
    end
    redirect_to root_path
